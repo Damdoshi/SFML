@@ -60,6 +60,10 @@ const Joystick::Identification& JoystickManager::getIdentification(unsigned int 
     return m_joysticks[joystick].identification;
 }
 
+int JoystickManager::getFileDescriptor(unsigned int joystick) const
+{
+  return (m_joysticks[joystick].joystick.getFileDescriptor());
+}
 
 ////////////////////////////////////////////////////////////
 void JoystickManager::update()

@@ -439,6 +439,10 @@ namespace sf
 {
 namespace priv
 {
+  int JoystickImpl::getFileDescriptor(void) const
+  {
+    return (m_file);
+  }
 ////////////////////////////////////////////////////////////
 JoystickImpl::JoystickImpl() :
 m_file(-1)

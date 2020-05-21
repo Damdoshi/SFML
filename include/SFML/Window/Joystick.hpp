@@ -163,6 +163,8 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     static void update();
+
+static int getFileDescriptor(unsigned int joy);
 };
 
 } // namespace sf
