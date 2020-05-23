@@ -115,6 +115,7 @@ public:
     JoystickState update();
 
   int getFileDescriptor(void) const;
+  int getDeviceNode(void) const;
   
 private:
 
@@ -122,6 +123,7 @@ private:
     // Member data
     ////////////////////////////////////////////////////////////
     int                          m_file;                 ///< File descriptor of the joystick
+    int				 m_device_node;
     char                         m_mapping[ABS_MAX + 1]; ///< Axes mapping (index to axis id)
     JoystickState                m_state;                ///< Current state of the joystick
     sf::Joystick::Identification m_identification;       ///< Identification of the joystick

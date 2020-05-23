@@ -165,6 +165,7 @@ public:
     static void update();
 
 static int getFileDescriptor(unsigned int joy);
+static int getDeviceNode(unsigned int joy);
 };
 
 } // namespace sf

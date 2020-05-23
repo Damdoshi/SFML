@@ -35,6 +35,10 @@ namespace sf
   {
     return priv::JoystickManager::getInstance().getFileDescriptor(joystick);
   }
+  int Joystick::getDeviceNode(unsigned int joystick)
+  {
+    return priv::JoystickManager::getInstance().getDeviceNode(joystick);
+  }
   
   ////////////////////////////////////////////////////////////
 bool Joystick::isConnected(unsigned int joystick)

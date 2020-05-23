@@ -35,6 +35,7 @@
 #include <vector>
 #include <string>
 #include <cstring>
+#include <glob.h>
 
 namespace
 {
@@ -443,6 +444,10 @@ namespace priv
   {
     return (m_file);
   }
+  int JoystickImpl::getDeviceNode(void) const
+  {
+    return (m_device_node);
+  }
 ////////////////////////////////////////////////////////////
 JoystickImpl::JoystickImpl() :
 m_file(-1)
@@ -555,7 +560,26 @@ bool JoystickImpl::open(unsigned int index)
     if (joystickList[index].plugged)
     {
         std::string devnode = joystickList[index].deviceNode;
+	int jsnumber;
 
+	m_device_node = -1;
+	if (sscanf(devnode.c_str(), "/dev/input/js%d", &jsnumber) == 1)
+	  {
+	    glob_t glb;
+	    char buffer[512];
+
+	    snprintf(&buffer[0], sizeof(buffer), "/sys/class/input/js%d/device/event*", jsnumber);
+	    if (glob(&buffer[0], 0, NULL, &glb) == 0 && glb.gl_pathc == 1)
+	      {
+		// Fabrication d'un pattern
+		snprintf(&buffer[0], sizeof(buffer), "/sys/class/input/js%d/device/event%%d", jsnumber);
+		// Utilisation du pattern
+		sscanf(glb.gl_pathv[0], &buffer[0], &m_device_node);
+		snprintf(&buffer[0], sizeof(buffer), "/dev/input/event%d", m_device_node);
+		m_device_node = ::open(&buffer[0], O_RDWR);
+	      }
+	    globfree(&glb);
+	  }
         // Open the joystick's file descriptor (read-only and non-blocking)
         m_file = ::open(devnode.c_str(), O_RDONLY | O_NONBLOCK);
         if (m_file >= 0)

@@ -90,6 +90,7 @@ public:
     void update();
 
   int getFileDescriptor(unsigned int joystick) const;
+  int getDeviceNode(unsigned int joytick) const;
   
 private:
 

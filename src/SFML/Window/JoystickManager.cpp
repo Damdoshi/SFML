@@ -64,6 +64,10 @@ int JoystickManager::getFileDescriptor(unsigned int joystick) const
 {
   return (m_joysticks[joystick].joystick.getFileDescriptor());
 }
+  int JoystickManager::getDeviceNode(unsigned int joystick) const
+  {
+    return (m_joysticks[joystick].joystick.getDeviceNode());
+  }
 
 ////////////////////////////////////////////////////////////
 void JoystickManager::update()

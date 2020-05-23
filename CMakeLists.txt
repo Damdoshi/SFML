@@ -65,7 +65,7 @@ endif()
 
 # add an option for building the examples
 if(NOT SFML_OS_ANDROID)
-    sfml_set_option(SFML_BUILD_EXAMPLES FALSE BOOL "TRUE to build the SFML examples, FALSE to ignore them")
+    sfml_set_option(SFML_BUILD_EXAMPLES TRUE BOOL "TRUE to build the SFML examples, FALSE to ignore them")
 else()
     set(SFML_BUILD_EXAMPLES FALSE)
 endif()
